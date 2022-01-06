@@ -83,9 +83,9 @@ export default function App() {
       <FlatList
         style={styles.list}
         data={pokemons}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
           <TouchableOpacity
-            key={`pokemon-${item.name}`}
             style={styles.pokemonCard}
             onPress={() => choosePokemon(item.name)}
           >
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 20,
     borderRadius: 5,
-    width: "20em",
+    width: 300,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
