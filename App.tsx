@@ -59,6 +59,27 @@ export default function App() {
     fetchData();
   }, []);
 
+  const renderPokemons = ({ item }: { item: pokemon }) => (
+    <TouchableOpacity
+      style={styles.pokemonCard}
+      onPress={() => choosePokemon(item.name)}
+    >
+      <Text style={{ color: "white", fontSize: 20, fontWeight: "700" }}>
+        {item.name}
+      </Text>
+      <Image
+        source={{
+          uri: item.image,
+        }}
+        style={{ width: 200, height: 160, marginBottom: 10 }}
+      />
+      <Text style={{ color: "white" }}>attack: {item.attack}</Text>
+      <Text style={{ color: "white" }}>defense: {item.defense}</Text>
+      <Text style={{ color: "white" }}>speed: {item.speed}</Text>
+      <Text style={{ color: "white" }}>weight: {item.weight}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View
       style={{
@@ -84,26 +105,7 @@ export default function App() {
         style={styles.list}
         data={pokemons}
         keyExtractor={(item) => item.name}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.pokemonCard}
-            onPress={() => choosePokemon(item.name)}
-          >
-            <Text style={{ color: "white", fontSize: 20, fontWeight: "700" }}>
-              {item.name}
-            </Text>
-            <Image
-              source={{
-                uri: item.image,
-              }}
-              style={{ width: 200, height: 160, marginBottom: 10 }}
-            />
-            <Text style={{ color: "white" }}>attack: {item.attack}</Text>
-            <Text style={{ color: "white" }}>defense: {item.defense}</Text>
-            <Text style={{ color: "white" }}>speed: {item.speed}</Text>
-            <Text style={{ color: "white" }}>weight: {item.weight}</Text>
-          </TouchableOpacity>
-        )}
+        renderItem={renderPokemons}
       />
     </View>
   );
